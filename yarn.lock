@@ -1477,14 +1477,6 @@
   resolved "https://registry.yarnpkg.com/@react-navigation/elements/-/elements-1.2.1.tgz#86f19781c6f34a5c9dd25dca99915e0306f477d1"
   integrity sha512-EnmAbKMsptrliRKf95rdgS6BhMjML+mIns06+G1Vdih6BrEo7/0iytThUv3WBf99AI76dyEq/cqLUwHPiFzXWg==
 
-"@react-navigation/native-stack@^6.2.5":
-  version "6.2.5"
-  resolved "https://registry.yarnpkg.com/@react-navigation/native-stack/-/native-stack-6.2.5.tgz#bfa19516cf434f831e6d4ba28d32b9bc5436d181"
-  integrity sha512-XCtwl4LEr06nzxMG4aXbYfbO/pAjyhGOR3QtBVBq/uGfVGkeK8utKUe925reqd1x099CiEfSJLpgeR2KzzYp+Q==
-  dependencies:
-    "@react-navigation/elements" "^1.2.1"
-    warn-once "^0.1.0"
-
 "@react-navigation/native@^6.0.6":
   version "6.0.6"
   resolved "https://registry.yarnpkg.com/@react-navigation/native/-/native-6.0.6.tgz#0f2577358d73d7b21ff5b2455f0a2d51b1ad2837"
@@ -1500,6 +1492,15 @@
   integrity sha512-8xJL+djIzpFdRW/sGlKojQ06fWgFk1c5jER9501HYJ12LF5DIJFr/tqBI2TJ6bk+y+QFu0nbNyeRC80OjRlmkA==
   dependencies:
     nanoid "^3.1.23"
+
+"@react-navigation/stack@^6.0.11":
+  version "6.0.11"
+  resolved "https://registry.yarnpkg.com/@react-navigation/stack/-/stack-6.0.11.tgz#9a94089da7a6bb6b41084c2b9e88ef542d41345d"
+  integrity sha512-Osc2mXi0Zh/u92HRCceDqVfVnypTa2sZgYMJDU+vDhHz38negtbCG+cjje6nApSjwC5WTVhYP4OoD5WBSh51+g==
+  dependencies:
+    "@react-navigation/elements" "^1.2.1"
+    color "^3.1.3"
+    warn-once "^0.1.0"
 
 "@sideway/address@^4.1.0":
   version "4.1.2"
@@ -1668,6 +1669,22 @@
   resolved "https://registry.yarnpkg.com/@types/q/-/q-1.5.5.tgz#75a2a8e7d8ab4b230414505d92335d1dcb53a6df"
   integrity sha512-L28j2FcJfSZOnL1WBjDYp2vUHCeIFlyYI/53EwD/rKUBQ7MtUUfbQWiyKJGpcnv4/WgrhWsFKrcPstcAt/J0tQ==
 
+"@types/react-native-calendars@^1.1264.3":
+  version "1.1264.3"
+  resolved "https://registry.yarnpkg.com/@types/react-native-calendars/-/react-native-calendars-1.1264.3.tgz#fb3f766a7f8f058cee8d5cb7f0c175dce0c8a407"
+  integrity sha512-0PCHDtDFC7Q2YZgtAjoHS3amPmOhUsMysyS6YNYjDqKmpJ4Qir+CK8RHTN+b+r93X//eaGyYaIbu9vCh+ydKlw==
+  dependencies:
+    "@types/react" "*"
+    "@types/react-native" "*"
+    "@types/xdate" "*"
+
+"@types/react-native@*":
+  version "0.66.5"
+  resolved "https://registry.yarnpkg.com/@types/react-native/-/react-native-0.66.5.tgz#a9bb2fdf6355c4a4426904eae95077d1a462f5c6"
+  integrity sha512-hTLfKfepd+A+jUpgj+OhHtW7UlIvhyHyQ4mOCnRfEjhxq4PGvspETIHIcTV2DEfnWNX3Gi9Q0gGINrU8AG7YeA==
+  dependencies:
+    "@types/react" "*"
+
 "@types/react-native@^0.65":
   version "0.65.14"
   resolved "https://registry.yarnpkg.com/@types/react-native/-/react-native-0.65.14.tgz#d85948b68cc636fc73172c6708b1ff4558a79300"
@@ -1713,6 +1730,11 @@
     "@types/hoist-non-react-statics" "*"
     "@types/react" "*"
     csstype "^3.0.2"
+
+"@types/xdate@*":
+  version "0.8.32"
+  resolved "https://registry.yarnpkg.com/@types/xdate/-/xdate-0.8.32.tgz#52f1bc426cc6929474034e5e3b83f82f43e25dcd"
+  integrity sha512-giM6hmU4ZCCAQj8BVSMNMA8hQwvKuWewLIe7r+G5NtGvehqW9jXdF/V6CzzkQYgHsk+67/udxql3RdfR8zqSNA==
 
 "@types/yargs-parser@*":
   version "20.2.1"
@@ -1905,6 +1927,13 @@ atob@^2.1.2:
   version "2.1.2"
   resolved "https://registry.yarnpkg.com/atob/-/atob-2.1.2.tgz#6d9517eb9e030d2436666651e86bd9f6f13533c9"
   integrity sha512-Wm6ukoaOGJi/73p/cl2GvLjTI5JM1k/O14isD73YML8StrH/7/lRFgmg8nICZgD3bZZvjwCGxtMOD3wWNAu8cg==
+
+axios@^0.24.0:
+  version "0.24.0"
+  resolved "https://registry.yarnpkg.com/axios/-/axios-0.24.0.tgz#804e6fa1e4b9c5288501dd9dff56a7a0940d20d6"
+  integrity sha512-Q6cWsys88HoPgAaFAVUb0WpPk0O8iTeisR9IMqy9G8AbO4NlpVknrnQS03zzF9PGAWgO3cgletO3VjV/P7VztA==
+  dependencies:
+    follow-redirects "^1.14.4"
 
 babel-core@^7.0.0-bridge.0:
   version "7.0.0-bridge.0"
@@ -2356,7 +2385,7 @@ color-string@^1.5.3, color-string@^1.6.0:
     color-name "^1.0.0"
     simple-swizzle "^0.2.2"
 
-color@^3.1.2:
+color@^3.1.2, color@^3.1.3:
   version "3.2.1"
   resolved "https://registry.yarnpkg.com/color/-/color-3.2.1.tgz#3544dc198caf4490c3ecc9a790b54fe9ff45e164"
   integrity sha512-aBl7dZI9ENN6fUGC7mWpMTPNHmWUSNan9tuWN6ahh5ZLNk9baLJOnSMlrQkHcrfFgz2/RigjUVAjdx36VcemKA==
@@ -2594,6 +2623,11 @@ csstype@^3.0.2:
   version "3.0.9"
   resolved "https://registry.yarnpkg.com/csstype/-/csstype-3.0.9.tgz#6410af31b26bd0520933d02cbc64fce9ce3fbf0b"
   integrity sha512-rpw6JPxK6Rfg1zLOYCSwle2GFOOsnjmDYDaBwEcwoOg4qlsIVCN789VkBZDJAGi4T07gI4YSutR43t9Zz4Lzuw==
+
+date-fns@^2.26.0:
+  version "2.26.0"
+  resolved "https://registry.yarnpkg.com/date-fns/-/date-fns-2.26.0.tgz#fa45305543c392c4f914e50775fd2a4461e60fbd"
+  integrity sha512-VQI812dRi3cusdY/fhoBKvc6l2W8BPWU1FNVnFH9Nttjx4AFBRzfSVb/Eyc7jBT6e9sg1XtAGsYpBQ6c/jygbg==
 
 dayjs@^1.8.15:
   version "1.10.7"
@@ -3212,6 +3246,11 @@ flow-parser@^0.121.0:
   version "0.121.0"
   resolved "https://registry.yarnpkg.com/flow-parser/-/flow-parser-0.121.0.tgz#9f9898eaec91a9f7c323e9e992d81ab5c58e618f"
   integrity sha512-1gIBiWJNR0tKUNv8gZuk7l9rVX06OuLzY9AoGio7y/JT4V1IZErEMEq2TJS+PFcw/y0RshZ1J/27VfK1UQzYVg==
+
+follow-redirects@^1.14.4:
+  version "1.14.5"
+  resolved "https://registry.yarnpkg.com/follow-redirects/-/follow-redirects-1.14.5.tgz#f09a5848981d3c772b5392309778523f8d85c381"
+  integrity sha512-wtphSXy7d4/OR+MvIFbCVBDzZ5520qV8XfPklSN5QtxuMUJZ+b0Wnst1e1lCDocfzuCkHqj8k0FpZqO+UIaKNA==
 
 fontfaceobserver@^2.1.0:
   version "2.1.0"
@@ -4228,11 +4267,6 @@ mdn-data@2.0.4:
   version "2.0.4"
   resolved "https://registry.yarnpkg.com/mdn-data/-/mdn-data-2.0.4.tgz#699b3c38ac6f1d728091a64650b65d388502fd5b"
   integrity sha512-iV3XNKw06j5Q7mi6h+9vbx23Tv7JkjEVgKHW4pimwyDGWm0OIQntJJ+u1C6mg6mK1EaTv42XQ7w76yuzH7M2cA==
-
-memoize-one@^5.2.1:
-  version "5.2.1"
-  resolved "https://registry.yarnpkg.com/memoize-one/-/memoize-one-5.2.1.tgz#8337aa3c4335581839ec01c3d594090cebe8f00e"
-  integrity sha512-zYiwtZUcYyXKo/np96AGZAckk+FWWsUdJ3cHGGmld7+AhvcWmQyGCYUh1hc4Q/pkOhb65dQR/pqCyK0cOaHz4Q==
 
 merge-deep@^3.0.2:
   version "3.0.3"
@@ -5261,20 +5295,18 @@ react-is@^17.0.1:
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-17.0.2.tgz#e691d4a8e9c789365655539ab372762b0efb54f0"
   integrity sha512-w2GsyukL62IJnlaff/nRegPQR94C/XXamvMWmSHRJ4y7Ts/4ocGRmTHvOs8PSE6pB3dWOrD/nueuU5sduBsQ4w==
 
-react-native-calendars@^1.1268.0:
-  version "1.1268.0"
-  resolved "https://registry.yarnpkg.com/react-native-calendars/-/react-native-calendars-1.1268.0.tgz#6b4ea1c6c239be67bcc6dadb18178e97cc8a6379"
-  integrity sha512-aot8/D4zvLUcqOvfo4kZk5IS6gkpT+Ew37Ez035OI8EDx1GDJxkqfO44Nhai1yLnIuvuOfbSIuOD4lJNn8A7hw==
+react-native-calendars@^1.505.0:
+  version "1.505.0"
+  resolved "https://registry.yarnpkg.com/react-native-calendars/-/react-native-calendars-1.505.0.tgz#0eba6b4229e1ecf66aba015bd9e3b1b0b6cb86f3"
+  integrity sha512-U5+Lu7osqNByyAhCapH3TDLBNHDIv7lNA5T9eLnY+LFw8olJkM7WDlLFLpE+RTXcMY1hLI6GjaSg9o5Qpyz3cQ==
   dependencies:
     hoist-non-react-statics "^3.3.1"
     immutable "^4.0.0-rc.12"
     lodash "^4.17.15"
-    memoize-one "^5.2.1"
+    moment "^2.24.0"
     prop-types "^15.5.10"
     react-native-swipe-gestures "^1.0.5"
     xdate "^0.8.0"
-  optionalDependencies:
-    moment "^2.24.0"
 
 react-native-codegen@^0.0.6:
   version "0.0.6"
