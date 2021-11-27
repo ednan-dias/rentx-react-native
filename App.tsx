@@ -3,6 +3,7 @@ import "react-native-gesture-handler";
 
 import AppLoading from "expo-app-loading";
 import { ThemeProvider } from "styled-components";
+
 import {
   useFonts,
   Inter_400Regular,
@@ -18,6 +19,14 @@ import {
 import { Routes } from "./src/routes";
 
 import theme from "./src/styles/theme";
+
+import { RootStackParamList } from "./src/@types/navigation";
+
+declare global {
+  namespace ReactNavigation {
+    interface RootParamList extends RootStackParamList {}
+  }
+}
 
 export default function App() {
   const [fontsLoaded] = useFonts({

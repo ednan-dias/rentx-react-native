@@ -30,18 +30,13 @@ interface Params {
   car: CarDTO;
 }
 
-type NavigationProps = {
-  navigate: (screen: string) => void;
-  goBack: () => void;
-};
-
 export function CarDetails() {
-  const navigation = useNavigation<NavigationProps>();
+  const navigation = useNavigation();
   const route = useRoute();
   const { car } = route.params as Params;
 
   function handleConfirmRental() {
-    navigation.navigate("Scheduling");
+    navigation.navigate("Scheduling", { car });
   }
 
   return (
