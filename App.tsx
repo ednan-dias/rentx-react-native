@@ -1,5 +1,4 @@
 import React from "react";
-import "react-native-gesture-handler";
 
 import AppLoading from "expo-app-loading";
 import { ThemeProvider } from "styled-components";

@@ -7,6 +7,7 @@ import { Scheduling } from "../screens/Scheduling";
 import { SchedulingDetails } from "../screens/SchedulingDetails";
 import { SchedulingComplete } from "../screens/SchedulingComplete";
 import { MyCars } from "../screens/MyCars";
+import { Splash } from "../screens/Splash";
 import { RootStackParamList } from "../@types/navigation";
 
 const { Navigator, Screen } = createStackNavigator<RootStackParamList>();
@@ -17,8 +18,14 @@ export function StackRoutes() {
       screenOptions={{
         headerShown: false,
       }}
+      initialRouteName="Splash"
     >
-      <Screen name="Home" component={Home} />
+      <Screen name="Splash" component={Splash} />
+      <Screen
+        name="Home"
+        component={Home}
+        options={{ gestureEnabled: false }}
+      />
       <Screen name="CarDetails" component={CarDetails} />
       <Screen name="Scheduling" component={Scheduling} />
       <Screen name="SchedulingDetails" component={SchedulingDetails} />
