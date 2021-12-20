@@ -29,3 +29,9 @@ export type RootStackParamList = {
   };
   MyCars: undefined;
 };
+
+export type RootBottomTabParamList = {
+  Home: undefined;
+  Profile: undefined;
+  MyCars: undefined;
+};

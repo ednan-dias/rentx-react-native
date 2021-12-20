@@ -9,6 +9,7 @@ import {
 } from "react-native";
 import * as yup from "yup";
 import { useTheme } from "styled-components";
+import { useAuth } from "../../hooks/auth";
 
 import { Button } from "../../components/Button";
 import { Input } from "../../components/Input";
@@ -19,6 +20,8 @@ import { Container, Header, Title, SubTitle, Form, Footer } from "./styles";
 export function SignIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  const { signIn } = useAuth();
 
   const navigation = useNavigation();
 
@@ -35,7 +38,8 @@ export function SignIn() {
       });
 
       await schema.validate({ email, password });
-      Alert.alert("Tudo Certo!");
+
+      await signIn({ email, password });
     } catch (error) {
       if (error instanceof yup.ValidationError) {
         Alert.alert("Opa", error.message);

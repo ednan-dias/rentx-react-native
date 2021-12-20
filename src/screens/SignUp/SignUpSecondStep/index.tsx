@@ -6,7 +6,6 @@ import {
   Alert,
 } from "react-native";
 
-import { Confirmation } from "../../Confirmation";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import { BackButton } from "../../../components/BackButton";
 import { Bullet } from "../../../components/Bullet";
@@ -24,6 +23,7 @@ import {
   Form,
   FormTitle,
 } from "./styles";
+import api from "../../../services/api";
 
 interface Params {
   user: {
@@ -43,7 +43,7 @@ export function SignUpSecondStep() {
 
   const { user } = route.params as Params;
 
-  function handleRegister() {
+  async function handleRegister() {
     if (!password || !passwordConfirm) {
       return Alert.alert("Informe a senha e confirme");
     }
@@ -52,11 +52,24 @@ export function SignUpSecondStep() {
       return Alert.alert("As senhas não são iguais");
     }
 
-    navigation.navigate("Confirmation", {
-      nextScreen: "SignIn",
-      title: "Conta criada",
-      message: `Agora é só fazer login\ne aproveitar.`,
-    });
+    await api
+      .post("/users", {
+        name: user.name,
+        email: user.email,
+        driver_license: user.driver_license,
+        password,
+      })
+      .then(() => {
+        navigation.navigate("Confirmation", {
+          nextScreen: "SignIn",
+          title: "Conta criada",
+          message: `Agora é só fazer login\ne aproveitar.`,
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+        Alert.alert("Opa", "Não foi possível cadastrar");
+      });
   }
 
   return (
