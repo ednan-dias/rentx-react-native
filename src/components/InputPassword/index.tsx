@@ -41,6 +41,7 @@ export function InputPassword({ iconName, value, ...rest }: Props) {
         onFocus={() => setIsFocused(true)}
         onBlur={handleInputBlur}
         isFocused={isFocused}
+        autoCorrect={false}
       />
 
       <BorderlessButton

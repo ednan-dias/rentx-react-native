@@ -18,9 +18,9 @@ export function StackAppRoutes() {
       screenOptions={{
         headerShown: false,
       }}
-      initialRouteName="Home"
+      initialRouteName="HomeStack"
     >
-      <Screen name="Home" component={Home} />
+      <Screen name="HomeStack" component={Home} />
       <Screen name="CarDetails" component={CarDetails} />
       <Screen name="Scheduling" component={Scheduling} />
       <Screen name="SchedulingDetails" component={SchedulingDetails} />

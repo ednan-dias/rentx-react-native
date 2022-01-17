@@ -1,4 +1,5 @@
 import { CarDTO } from "../../dtos/CarDTO";
+import { Car as ModelCar } from "../../database/models/Car";
 
 export type RootStackParamList = {
   Splash: undefined;
@@ -11,9 +12,9 @@ export type RootStackParamList = {
       driver_license: string;
     };
   };
-  Home: undefined;
+  HomeStack: undefined;
   CarDetails: {
-    car: CarDTO;
+    car: ModelCar;
   };
   Scheduling: {
     car: CarDTO;
@@ -31,7 +32,7 @@ export type RootStackParamList = {
 };
 
 export type RootBottomTabParamList = {
-  Home: undefined;
+  HomeBottom: undefined;
   Profile: undefined;
   MyCars: undefined;
 };
