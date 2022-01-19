@@ -11,7 +11,7 @@ import { Car as ModelCar } from "../../database/models/Car";
 
 import { LoadAnimation } from "../../components/LoadAnimation";
 
-import api from "../../services/api";
+import { api } from "../../services/api";
 import Logo from "../../assets/logo.svg";
 
 import { Container, Header, TotalCars, HeaderContent, CarList } from "./styles";
@@ -36,6 +36,8 @@ export function Home() {
         );
 
         const { changes, latestVersion } = response.data;
+        console.log("### SINCRONIZAÇÃO ###");
+        console.log(changes);
         return { changes, timestamp: latestVersion };
       },
       pushChanges: async ({ changes }) => {
@@ -70,6 +72,12 @@ export function Home() {
       isMounted = false;
     };
   }, []);
+
+  useEffect(() => {
+    if (netInfo.isConnected === true) {
+      offlineSynchronize();
+    }
+  }, [netInfo.isConnected]);
 
   useEffect(() => {
     if (netInfo.isConnected === true) {

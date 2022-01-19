@@ -23,7 +23,7 @@ import {
   Form,
   FormTitle,
 } from "./styles";
-import api from "../../../services/api";
+import { api } from "../../../services/api";
 
 interface Params {
   user: {

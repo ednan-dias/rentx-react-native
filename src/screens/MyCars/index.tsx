@@ -1,13 +1,17 @@
-import React, { useEffect, useState } from "react";
-import { AntDesign } from "@expo/vector-icons";
-import { useNavigation } from "@react-navigation/core";
+import React, { useState, useEffect } from "react";
 import { StatusBar, FlatList } from "react-native";
 import { useTheme } from "styled-components";
+import { useNavigation } from "@react-navigation/core";
+import { AntDesign } from "@expo/vector-icons";
+import { parseISO, format } from "date-fns";
+
 import { BackButton } from "../../components/BackButton";
 import { LoadAnimation } from "../../components/LoadAnimation";
-import { CarDTO } from "../../dtos/CarDTO";
+
 import { Car } from "../../components/Car";
-import api from "../../services/api";
+import { CarDTO } from "../../dtos/CarDTO";
+import { Car as ModelCar } from "../../database/models/Car";
+import { api } from "../../services/api";
 
 import {
   Container,
@@ -33,23 +37,43 @@ interface CarProps {
   endDate: string;
 }
 
+interface DataProps {
+  id: string;
+  car: ModelCar;
+  start_date: string;
+  end_date: string;
+}
+
 export function MyCars() {
-  const [cars, setCars] = useState<CarProps[]>([]);
+  const [cars, setCars] = useState<DataProps[]>([]);
   const [loading, setLoading] = useState(true);
+
   const navigation = useNavigation();
   const theme = useTheme();
+
+  function handleBack() {
+    navigation.goBack();
+  }
 
   useEffect(() => {
     async function fetchCars() {
       try {
-        const response = await api.get("/schedules_byuser/?user_id=1");
-        setCars(response.data);
+        const response = await api.get("/rentals");
+        const dataFormatted = response.data.map((data: DataProps) => {
+          return {
+            car: data.car,
+            start_date: format(parseISO(data.start_date), "dd/MM/yyyy"),
+            end_date: format(parseISO(data.end_date), "dd/MM/yyyy"),
+          };
+        });
+        setCars(dataFormatted);
       } catch (error) {
         console.log(error);
       } finally {
         setLoading(false);
       }
     }
+
     fetchCars();
   }, []);
 
@@ -61,10 +85,7 @@ export function MyCars() {
           translucent
           backgroundColor="transparent"
         />
-        <BackButton
-          onPress={() => navigation.goBack()}
-          color={theme.colors.shape}
-        />
+        <BackButton onPress={handleBack} color={theme.colors.shape} />
 
         <Title>
           Escolha uma {"\n"}
@@ -79,13 +100,13 @@ export function MyCars() {
       ) : (
         <Content>
           <Appointments>
-            <AppointmentsTitle>Agendamentos</AppointmentsTitle>
+            <AppointmentsTitle>Agendamentos feitos</AppointmentsTitle>
             <AppointmentsQuantity>{cars.length}</AppointmentsQuantity>
           </Appointments>
 
           <FlatList
             data={cars}
-            keyExtractor={(car) => car.id}
+            keyExtractor={(item) => String(item.id)}
             showsVerticalScrollIndicator={false}
             renderItem={({ item }) => (
               <CarWrapper>
@@ -93,14 +114,14 @@ export function MyCars() {
                 <CarFooter>
                   <CarFooterTitle>Período</CarFooterTitle>
                   <CarFooterPeriod>
-                    <CarFooterDate>{item.startDate}</CarFooterDate>
+                    <CarFooterDate>{item.start_date}</CarFooterDate>
                     <AntDesign
                       name="arrowright"
                       size={20}
                       color={theme.colors.title}
                       style={{ marginHorizontal: 10 }}
                     />
-                    <CarFooterDate>{item.endDate}</CarFooterDate>
+                    <CarFooterDate>{item.end_date}</CarFooterDate>
                   </CarFooterPeriod>
                 </CarFooter>
               </CarWrapper>

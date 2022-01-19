@@ -5,7 +5,8 @@ import React, {
   ReactNode,
   useEffect,
 } from "react";
-import api from "../services/api";
+
+import { api } from "../services/api";
 import { database } from "../database";
 import { User as ModelUser } from "../database/models/User";
 
@@ -19,16 +20,16 @@ interface User {
   token: string;
 }
 
-interface SigInCredentials {
+interface SignInCredentials {
   email: string;
   password: string;
 }
 
 interface AuthContextData {
   user: User;
-  signIn: (credentials: SigInCredentials) => Promise<void>;
+  signIn: (credentials: SignInCredentials) => Promise<void>;
   signOut: () => Promise<void>;
-  updateUser: (user: User) => Promise<void>;
+  updatedUser: (user: User) => Promise<void>;
 }
 
 interface AuthProviderProps {
@@ -40,7 +41,7 @@ const AuthContext = createContext<AuthContextData>({} as AuthContextData);
 function AuthProvider({ children }: AuthProviderProps) {
   const [data, setData] = useState<User>({} as User);
 
-  async function signIn({ email, password }: SigInCredentials) {
+  async function signIn({ email, password }: SignInCredentials) {
     try {
       const response = await api.post("/sessions", {
         email,
@@ -53,14 +54,15 @@ function AuthProvider({ children }: AuthProviderProps) {
       const userCollection = database.get<ModelUser>("users");
       await database.write(async () => {
         await userCollection.create((newUser) => {
-          newUser.user_id = user.id;
-          newUser.name = user.name;
-          newUser.email = user.email;
-          newUser.driver_license = user.driver_license;
-          newUser.avatar = user.avatar;
-          newUser.token = token;
+          (newUser.user_id = user.id),
+            (newUser.name = user.name),
+            (newUser.email = user.email),
+            (newUser.driver_license = user.driver_license),
+            (newUser.avatar = user.avatar),
+            (newUser.token = token);
         });
       });
+
       setData({ ...user, token });
     } catch (error) {
       throw new Error(error as string);
@@ -81,11 +83,11 @@ function AuthProvider({ children }: AuthProviderProps) {
     }
   }
 
-  async function updateUser(user: User) {
+  async function updatedUser(user: User) {
     try {
       const userCollection = database.get<ModelUser>("users");
       await database.write(async () => {
-        const userSelected = await userCollection.find(data.id);
+        const userSelected = await userCollection.find(user.id);
         await userSelected.update((userData) => {
           (userData.name = user.name),
             (userData.driver_license = user.driver_license),
@@ -95,7 +97,6 @@ function AuthProvider({ children }: AuthProviderProps) {
 
       setData(user);
     } catch (error) {
-      console.log(error);
       throw new Error(error as string);
     }
   }
@@ -113,6 +114,7 @@ function AuthProvider({ children }: AuthProviderProps) {
         setData(userData);
       }
     }
+
     loadUserData();
   }, []);
 
@@ -122,7 +124,7 @@ function AuthProvider({ children }: AuthProviderProps) {
         user: data,
         signIn,
         signOut,
-        updateUser,
+        updatedUser,
       }}
     >
       {children}
