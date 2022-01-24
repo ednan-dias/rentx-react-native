@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { StatusBar, FlatList } from "react-native";
 import { useTheme } from "styled-components";
-import { useNavigation } from "@react-navigation/core";
+import { useNavigation, useIsFocused } from "@react-navigation/core";
 import { AntDesign } from "@expo/vector-icons";
 import { parseISO, format } from "date-fns";
 
@@ -9,7 +9,6 @@ import { BackButton } from "../../components/BackButton";
 import { LoadAnimation } from "../../components/LoadAnimation";
 
 import { Car } from "../../components/Car";
-import { CarDTO } from "../../dtos/CarDTO";
 import { Car as ModelCar } from "../../database/models/Car";
 import { api } from "../../services/api";
 
@@ -28,14 +27,7 @@ import {
   CarFooterPeriod,
   CarFooterDate,
 } from "./styles";
-
-interface CarProps {
-  id: string;
-  user_id: string;
-  car: CarDTO;
-  startDate: string;
-  endDate: string;
-}
+import { getPlatformDate } from "../../utils/getPlatformDate";
 
 interface DataProps {
   id: string;
@@ -47,6 +39,7 @@ interface DataProps {
 export function MyCars() {
   const [cars, setCars] = useState<DataProps[]>([]);
   const [loading, setLoading] = useState(true);
+  const screenIsFocus = useIsFocused();
 
   const navigation = useNavigation();
   const theme = useTheme();
@@ -61,9 +54,16 @@ export function MyCars() {
         const response = await api.get("/rentals");
         const dataFormatted = response.data.map((data: DataProps) => {
           return {
+            id: data.id,
             car: data.car,
-            start_date: format(parseISO(data.start_date), "dd/MM/yyyy"),
-            end_date: format(parseISO(data.end_date), "dd/MM/yyyy"),
+            start_date: format(
+              getPlatformDate(parseISO(data.start_date)),
+              "dd/MM/yyyy"
+            ),
+            end_date: format(
+              getPlatformDate(parseISO(data.end_date)),
+              "dd/MM/yyyy"
+            ),
           };
         });
         setCars(dataFormatted);
@@ -75,7 +75,7 @@ export function MyCars() {
     }
 
     fetchCars();
-  }, []);
+  }, [screenIsFocus]);
 
   return (
     <Container>

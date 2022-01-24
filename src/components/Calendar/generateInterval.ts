@@ -1,7 +1,6 @@
 import { eachDayOfInterval, format } from "date-fns";
 
 import { MarkedDateProps, DayProps } from ".";
-
 import { getPlatformDate } from "../../utils/getPlatformDate";
 import theme from "../../styles/theme";
 

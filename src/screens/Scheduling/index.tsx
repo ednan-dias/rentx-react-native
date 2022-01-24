@@ -15,7 +15,7 @@ import { useNavigation, useRoute } from "@react-navigation/core";
 import ArrowSvg from "../../assets/arrow.svg";
 
 import { getPlatformDate } from "../../utils/getPlatformDate";
-import { format } from "date-fns";
+import { format, parseISO } from "date-fns";
 
 import {
   Container,
@@ -77,14 +77,14 @@ export function Scheduling() {
     setMarkedDates(interval);
 
     const firstDate = Object.keys(interval)[0];
-    const lastDate = Object.keys(interval)[Object.keys(interval).length - 1];
+    const endDate = Object.keys(interval)[Object.keys(interval).length - 1];
 
     setRentalPeriod({
       startFormatted: format(
         getPlatformDate(new Date(firstDate)),
         "dd/MM/yyyy"
       ),
-      endFormatted: format(getPlatformDate(new Date(lastDate)), "dd/MM/yyyy"),
+      endFormatted: format(getPlatformDate(new Date(endDate)), "dd/MM/yyyy"),
     });
   }
 

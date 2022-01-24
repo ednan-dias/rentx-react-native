@@ -4,11 +4,14 @@ import { useAuth } from "../hooks/auth";
 
 import { TabAppRoutes } from "./app.tab.routes";
 import { AuthRoutes } from "./auth.routes";
+import { LoadAnimation } from "../components/LoadAnimation";
 
 export function Routes() {
-  const { user } = useAuth();
+  const { user, loading } = useAuth();
 
-  return (
+  return loading ? (
+    <LoadAnimation />
+  ) : (
     <NavigationContainer>
       {user.id ? <TabAppRoutes /> : <AuthRoutes />}
     </NavigationContainer>

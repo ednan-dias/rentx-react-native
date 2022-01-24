@@ -34,9 +34,11 @@ import {
   OptionTitle,
   Section,
 } from "./styles";
+import { useNetInfo } from "@react-native-community/netinfo";
 
 export function Profile() {
   const { user, signOut, updateUser } = useAuth();
+  const netInfo = useNetInfo();
 
   const [option, setOption] = useState<"dataEdit" | "passwordEdit">("dataEdit");
   const [avatar, setAvatar] = useState(user.avatar);
@@ -98,6 +100,17 @@ export function Profile() {
     }
   }
 
+  function handleOptionChange(optionSelected: "dataEdit" | "passwordEdit") {
+    if (!netInfo.isConnected === true && optionSelected === "passwordEdit") {
+      Alert.alert(
+        "Você está Offline",
+        "Para mudar a senha, conecte-se a Internet"
+      );
+    } else {
+      setOption(optionSelected);
+    }
+  }
+
   async function handleSignOut() {
     Alert.alert(
       "Tem certeza?",
@@ -148,7 +161,7 @@ export function Profile() {
               <Options>
                 <Option
                   active={option === "dataEdit"}
-                  onPress={() => setOption("dataEdit")}
+                  onPress={() => handleOptionChange("dataEdit")}
                 >
                   <OptionTitle active={option === "dataEdit"}>
                     Dados
@@ -157,7 +170,7 @@ export function Profile() {
 
                 <Option
                   active={option === "passwordEdit"}
-                  onPress={() => setOption("passwordEdit")}
+                  onPress={() => handleOptionChange("passwordEdit")}
                 >
                   <OptionTitle active={option === "passwordEdit"}>
                     Mudar senha

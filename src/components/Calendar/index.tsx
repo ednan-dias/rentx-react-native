@@ -1,5 +1,9 @@
 import React from "react";
 import { Feather } from "@expo/vector-icons";
+import { useTheme } from "styled-components";
+
+import { generateInterval } from "./generateInterval";
+import { ptBR } from "./localeConfig";
 
 import {
   Calendar as CustomCalendar,
@@ -7,16 +11,15 @@ import {
   DateCallbackHandler,
 } from "react-native-calendars";
 
-import { useTheme } from "styled-components";
-import { ptBR } from "./localeConfig";
-import { generateInterval } from "./generateInterval";
+LocaleConfig.locales["pt-br"] = ptBR;
+LocaleConfig.defaultLocale = "pt-br";
 
 interface MarkedDateProps {
   [date: string]: {
     color: string;
     textColor: string;
     disabled?: boolean;
-    disabledTouchEvent?: boolean;
+    disableTouchEvent?: boolean;
   };
 }
 
@@ -36,16 +39,13 @@ interface CalendarProps {
 function Calendar({ markedDates, onDayPress }: CalendarProps) {
   const theme = useTheme();
 
-  LocaleConfig.locales["pt-br"] = ptBR;
-  LocaleConfig.defaultLocale = "pt-br";
-
   return (
     <CustomCalendar
       renderArrow={(direction) => (
         <Feather
           size={24}
-          color={theme.colors.shape}
-          name={`chevron-${direction}`}
+          color={theme.colors.text}
+          name={direction == "left" ? "chevron-left" : "chevron-right"}
         />
       )}
       headerStyle={{
@@ -58,9 +58,10 @@ function Calendar({ markedDates, onDayPress }: CalendarProps) {
       theme={{
         textDayFontFamily: theme.fonts.primary_400,
         textDayHeaderFontFamily: theme.fonts.primary_500,
-        textDayFontSize: 10,
+        textDayHeaderFontSize: 10,
         textMonthFontFamily: theme.fonts.secondary_600,
         textMonthFontSize: 20,
+        textDisabledColor: theme.colors.text_detail,
         monthTextColor: theme.colors.title,
         arrowStyle: {
           marginHorizontal: -15,

@@ -17,7 +17,7 @@ export type RootStackParamList = {
     car: ModelCar;
   };
   Scheduling: {
-    car: CarDTO;
+    car: ModelCar;
   };
   SchedulingDetails: {
     car: CarDTO;
